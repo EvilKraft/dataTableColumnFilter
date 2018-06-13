@@ -7,17 +7,23 @@ function dataTableColumnFilter( api ) {
             .appendTo( $(column.header()).empty() )
             .on( 'change', function () {
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                //column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                column.search( val ? ''+val+'' : '', true, false ).draw();
             }).on( 'click', function( event ) {
                 event.stopPropagation();
             });
 
         column.data().unique().sort().each( function ( d, j ) {
-            if(d){
-                select.append( '<option value="'+d+'">'+d+'</option>' )
+            var val = $.fn.dataTable.util.escapeRegex(d);
+           // if (column.search() === "^" + val + "$") {
+            if (column.search() === "" + val + "") {
+                select.append(
+                    '<option value="' + d + '" selected="selected">' + d + "</option>"
+                );
+            } else {
+                select.append('<option value="' + d + '">' + d + "</option>");
             }
-        });
-
+        } );
     });
 }
 
