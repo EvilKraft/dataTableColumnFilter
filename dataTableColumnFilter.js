@@ -14,16 +14,20 @@ function dataTableColumnFilter( api ) {
             });
 
         column.data().unique().sort().each( function ( d, j ) {
-            var val = $.fn.dataTable.util.escapeRegex(d);
-           // if (column.search() === "^" + val + "$") {
-            if (column.search() === "" + val + "") {
-                select.append(
-                    '<option value="' + d + '" selected="selected">' + d + "</option>"
-                );
-            } else {
-                select.append('<option value="' + d + '">' + d + "</option>");
+            if(d){
+                var val = $.fn.dataTable.util.escapeRegex(d);
+                // if (column.search() === "^" + val + "$") {
+                if (column.search() === "" + val + "") {
+                    select.append(
+                        '<option value="' + d + '" selected="selected">' + d + "</option>"
+                    );
+                } else {
+                    select.append('<option value="' + d + '">' + d + "</option>");
+                }
             }
-        } );
+        });
+
+
     });
 }
 
