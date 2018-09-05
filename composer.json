@@ -1,0 +1,13 @@
+{
+	"name": "EvilKraft/dataTableColumnFilter",
+	"type": "datatable-plugin",
+	"description": "Column filter for datatable",
+	"keywords": ["datatable"],
+	"license": "GPL-2.0+",
+	"homepage": "https://github.com/EvilKraft/dataTableColumnFilter",
+	"support": {
+	  "issues": "https://github.com/EvilKraft/dataTableColumnFilter/issues",
+	  "source": "https://github.com/EvilKraft/dataTableColumnFilter"
+	},
+	"require": { }
+}
