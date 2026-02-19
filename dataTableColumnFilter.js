@@ -32,7 +32,8 @@ function dataTableColumnFilter( api ) {
 $(document).on( 'init.dt', function ( e, settings ) {
     let api = new $.fn.dataTable.Api( settings );
 
-    if ( api.init().dataTableColumnFilter || $.fn.dataTable.defaults.dataTableColumnFilter ){
+    if ( !api.init().dataTableColumnFilter || !$.fn.dataTable.defaults.dataTableColumnFilter ){
         new dataTableColumnFilter( api );
     }
 } );
+
