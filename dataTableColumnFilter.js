@@ -5,12 +5,12 @@ function dataTableColumnFilter( api ) {
         const titleAll   = title+' (All)';
         const titleEmpty = title+' (Empty)';
 
-        let select = $('<select class="form-select" style="width: 100%; padding: 0; height: 20px;"><option selected value="">'+titleAll+'</option><option value="E-m-p-t-y">'+titleEmpty+'</option></select>')
+        let select = $('<select class="form-select" style="width: 100%; padding: 0; height: 20px;"><option selected value="">'+titleAll+'</option><option value="##Empty##">'+titleEmpty+'</option></select>')
             .appendTo( $(column.header()).empty() )
             .on( 'change', function () {
                 const val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                if(val === 'E-m-p-t-y'){
+                if(val === '##Empty##'){
                     column.search('^$', true, false ).draw();
                 }else{
                     //column.search( val ? '^'+val+'$' : '', true, false ).draw();
@@ -40,3 +40,4 @@ $(document).on( 'init.dt', function ( e, settings ) {
         new dataTableColumnFilter( api );
     }
 });
+
