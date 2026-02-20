@@ -1,4 +1,6 @@
 function dataTableColumnFilter( api ) {
+    const selectFilter = api.ajax.json().select_filter ?? [];
+
     api.columns('.select-filter').every( function () {
         let column = this;
         const title = column.header().innerText;
@@ -20,16 +22,16 @@ function dataTableColumnFilter( api ) {
                 event.stopPropagation();
             });
 
-        column.data().unique().sort().each( function ( d, j ) {
-            if(d){
-                const val = $.fn.dataTable.util.escapeRegex(d);
-                // if (column.search() === "^" + val + "$") {
-                if (column.search() === "" + val + "") {
-                    select.append('<option value="'+d+'" selected="selected">'+d+"</option>");
-                } else {
-                    select.append('<option value="'+d+'">'+d+"</option>");
-                }
+        const selectValues = (column.name() in selectFilter) ? selectFilter[column.name()] : column.data().unique().sort().toArray();
+        selectValues.forEach((d) => {
+            if (d === null || d === undefined) {
+                return;
             }
+
+            const val = $.fn.dataTable.util.escapeRegex(d);
+            // if (column.search() === "^" + val + "$") {
+            const selected = (column.search() === "" + val + "") ? 'selected="selected"' : '';
+            select.append(`<option value="${d}" ${selected}>${d}</option>`);
         });
     });
 }
@@ -40,4 +42,3 @@ $(document).on( 'init.dt', function ( e, settings ) {
         new dataTableColumnFilter( api );
     }
 });
-
